@@ -127,7 +127,7 @@ fig = plt.figure()
 
 fig=plt.figure()
 
-for num,data in enumerate(test_data[:101]):
+for num,data in enumerate(test_data[:100]):
     # cat: [1,0]
     # dog: [0,1]
     
