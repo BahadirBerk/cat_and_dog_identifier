@@ -15,7 +15,7 @@ import tensorflow as tf
 TRAIN_DIR = 'E:/DATA SETS/train'
 TEST_DIR = 'E:/DATA SETS/test'
 IMG_SIZE = 50
-LR = 1e-3 
+LR = 1e-3
 
 MODEL_NAME = 'dogvscats-{}-{}.model'.format(LR, '6conv-basic-video')
 
@@ -58,7 +58,7 @@ def process_test_data():
 
 train_data = create_train_data()
 #if you already have train data:
-# train_data = np.Load('train_data.npy')
+#train_data = np.load('train_data.npy')
 
 
 
@@ -84,6 +84,9 @@ convnet = conv_2d(convnet, 64, 2, activation='relu')
 convnet = max_pool_2d(convnet, 2)
 
 
+
+
+
 convnet = fully_connected(convnet, 1024, activation='relu')
 convnet = dropout(convnet, 0.8)
 
@@ -101,8 +104,8 @@ if os.path.exists('{}.meta'.format(MODEL_NAME)):
 
 
 
-train = train_data[:-500]
-test = train_data [-500:]
+train = train_data[:-1000]
+test = train_data [-1000:]
 
 
 X = np.array([i[0] for i in train]).reshape(-1, IMG_SIZE, IMG_SIZE, 1)
@@ -112,7 +115,7 @@ test_x = np.array([i[0] for i in test]).reshape(-1, IMG_SIZE, IMG_SIZE, 1)
 test_y = [i[1] for i in test]
 
 
-model.fit({'input': X}, {'targets': Y}, n_epoch=5, validation_set=({'input': test_x}, {'targets': test_y}), 
+model.fit({'input': X}, {'targets': Y}, n_epoch=15, validation_set=({'input': test_x}, {'targets': test_y}), 
     snapshot_step=500, show_metric=True, run_id=MODEL_NAME)
 
 
@@ -127,7 +130,7 @@ fig = plt.figure()
 
 fig=plt.figure()
 
-for num,data in enumerate(test_data[:100]):
+for num,data in enumerate(test_data[:12]):
     # cat: [1,0]
     # dog: [0,1]
     
